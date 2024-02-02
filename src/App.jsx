@@ -12,7 +12,6 @@ import searchIcon from './icons/search.svg';
 function App() {
 
     const [currentCountry, setCurrentCountry] = useState(null)
-
     const [filter, setFilter] = useState(array)
     const [countries, setCountries] = useState(filter)
     
@@ -36,12 +35,13 @@ function findCountryByCioc(cioc) {
     })
 }
 function findCountry(searchTerm) {
+    console.log(searchTerm)
     if(searchTerm === '') {
         filterCountries('all')
         return
     }
     let newArray = []
-    countries.map(country => {
+    filter.map(country => {
         if(!country.name) {
             return
         }
@@ -54,16 +54,19 @@ function findCountry(searchTerm) {
             return
         }
     })
+    console.log('newArray')
+    console.log(newArray)
     setCountries(newArray)
 }
 function filterCountries(option) {
     console.log(option)
     if(option === 'all') {
         setFilter(array)
+        setCountries(array)
         return
     }
     let newArray = []
-    filter.map(country => {
+    array.map(country => {
         if(country.region.toLowerCase() === option) {
             newArray.push(country)
         } else {
